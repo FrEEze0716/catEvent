@@ -1,6 +1,6 @@
 {
-    "name": "test3",
-    "short_name": "test3",
+    "name": "catevent",
+    "short_name": "catevent",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

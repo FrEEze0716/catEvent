@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:test3/services/notification_service.dart';
-import 'package:test3/utils/app_constants.dart';
-import 'package:test3/views/bottom_nav_bar/bottom_bar_view.dart';
-import 'package:test3/views/onboarding_screen.dart';
+
+import 'services/notification_service.dart';
+import 'utils/app_constants.dart';
+import 'views/bottom_nav_bar/bottom_bar_view.dart';
+import 'views/onboarding_screen.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print(message.data.toString());
@@ -37,10 +38,9 @@ class MyApp extends StatelessWidget {
         ),
       ),
       title: 'Flutter Demo',
-      home: OnBoardingScreen(),
-      /*home: FirebaseAuth.instance.currentUser == null
+      home: FirebaseAuth.instance.currentUser == null
           ? OnBoardingScreen()
-          : BottomBarView(),*/
+          : BottomBarView(),
     );
   }
 }

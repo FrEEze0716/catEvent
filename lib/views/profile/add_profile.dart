@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:test3/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../controller/auth_controller.dart';
 import '../../utils/app_color.dart';
 import '../../widgets/my_widgets.dart';
 

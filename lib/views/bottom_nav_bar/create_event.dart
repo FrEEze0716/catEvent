@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -7,10 +6,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:test3/controller/data_controller.dart';
-import 'package:test3/model/event_media_model.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
+import '../../controller/data_controller.dart';
+import '../../model/event_media_model.dart';
 import '../../utils/app_color.dart';
 import '../../widgets/my_widgets.dart';
 
@@ -943,7 +942,6 @@ class _CreateEventViewState extends State<CreateEventView> {
                                   if (media[i].isVideo!) {
                                     /// if video then first upload video file and then upload thumbnail and
                                     /// store it in the map
-
                                     String thumbnailUrl = await dataController
                                         .uploadThumbnailToFirebase(
                                             media[i].thumbnail!);
@@ -958,7 +956,6 @@ class _CreateEventViewState extends State<CreateEventView> {
                                     });
                                   } else {
                                     /// just upload image
-
                                     String imageUrl = await dataController
                                         .uploadImageToFirebase(media[i].image!);
                                     mediaUrls.add(

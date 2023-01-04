@@ -2,16 +2,15 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:test3/services/notification_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../controller/data_controller.dart';
+import '../../services/notification_service.dart';
 import '../../utils/app_color.dart';
 import '../../widgets/my_widgets.dart';
 
@@ -56,7 +55,6 @@ class _ChatState extends State<Chat> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     dataController = Get.find<DataController>();
     myUid = FirebaseAuth.instance.currentUser!.uid;
@@ -320,7 +318,11 @@ class _ChatState extends State<Chat> {
                   offstage: !isEmojiPickerOpen,
                   child: SizedBox(
                     height: 230,
+                    /*
                     child: EmojiPicker(
+                        onEmojiSelected: (Category category, Emoji emoji) {
+                          _onEmojiSelected(emoji);
+                        },
                         onBackspacePressed: _onBackspacePressed,
                         config: Config(
                             columns: 7,
@@ -333,12 +335,17 @@ class _ChatState extends State<Chat> {
                             indicatorColor: Colors.blue,
                             iconColor: Colors.grey,
                             iconColorSelected: Colors.blue,
+                            progressIndicatorColor: Colors.blue,
                             backspaceColor: Colors.blue,
                             showRecentsTab: true,
                             recentsLimit: 28,
+                            noRecentsText: 'No Recents',
+                            noRecentsStyle: const TextStyle(
+                                fontSize: 20, color: Colors.black26),
                             tabIndicatorAnimDuration: kTabScrollDuration,
                             categoryIcons: const CategoryIcons(),
                             buttonMode: ButtonMode.MATERIAL)),
+                            */
                   ),
                 ),
               ],

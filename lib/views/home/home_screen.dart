@@ -1,9 +1,8 @@
-import 'package:test3/controller/data_controller.dart';
-import 'package:test3/services/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../controller/data_controller.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/events_feed_widget.dart';
 

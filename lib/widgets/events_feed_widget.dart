@@ -1,17 +1,14 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:test3/controller/data_controller.dart';
 
+import '../controller/data_controller.dart';
 import '../model/ticket_model.dart';
 import '../utils/app_color.dart';
 import '../views/event_page/event_page_view.dart';
-import '../views/profile/add_profile.dart';
+import '../views/profile/profile.dart';
 
 List<AustinYogaWork> austin = [
   AustinYogaWork(rangeText: '7-8', title: 'CONCERN'),

@@ -1,14 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:test3/controller/data_controller.dart';
-import 'package:test3/utils/date_formatter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../controller/data_controller.dart';
 import '../../utils/app_color.dart';
 import '../check_out/check_out_screen.dart';
 import '../invite_guest/invite_guest_screen.dart';
-import 'package:intl/intl.dart';
 
 class EventPageView extends StatefulWidget {
   DocumentSnapshot eventData, user;

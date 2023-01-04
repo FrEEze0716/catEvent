@@ -22,7 +22,6 @@ class AuthController extends GetxController {
         .signInWithEmailAndPassword(email: email!, password: password!)
         .then((value) {
       /// Login Success
-
       isLoading(false);
       Get.to(() => BottomBarView());
     }).catchError((e) {
@@ -37,7 +36,6 @@ class AuthController extends GetxController {
     ///here we have to provide two things
     ///1- email
     ///2- password
-
     isLoading(true);
 
     auth

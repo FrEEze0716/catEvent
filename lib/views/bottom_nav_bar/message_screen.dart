@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:test3/controller/data_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../model/message_model.dart';
+import '../../controller/data_controller.dart';
 import '../chat/chat_room_screen.dart';
 
 class MessageScreen extends StatefulWidget {

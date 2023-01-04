@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:test3/controller/data_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../controller/data_controller.dart';
 import '../../model/ticket_model.dart';
 import '../../utils/app_color.dart';
 import '../../widgets/my_widgets.dart';

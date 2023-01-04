@@ -1,13 +1,11 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:test3/controller/auth_controller.dart';
-import 'package:test3/views/profile/add_profile.dart';
 
+import '../../controller/auth_controller.dart';
 import '../../utils/app_color.dart';
 import '../../widgets/my_widgets.dart';
+import '../profile/profile.dart';
 
 class LoginView extends StatefulWidget {
   LoginView({Key? key}) : super(key: key);
@@ -37,7 +35,6 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     authController = Get.put(AuthController());
   }

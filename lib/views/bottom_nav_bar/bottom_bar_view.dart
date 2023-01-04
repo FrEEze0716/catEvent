@@ -1,8 +1,8 @@
-import 'package:test3/controller/data_controller.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../controller/data_controller.dart';
 import '../../services/notification_service.dart';
 import '../community/community.dart';
 import '../home/home_screen.dart';

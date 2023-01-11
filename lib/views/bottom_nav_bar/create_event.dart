@@ -27,7 +27,7 @@ class _CreateEventViewState extends State<CreateEventView> {
   TextEditingController timeController = TextEditingController();
   TextEditingController titleController = TextEditingController();
   TextEditingController locationController = TextEditingController();
-  TextEditingController priceController = TextEditingController();
+  TextEditingController pointController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController tagsController = TextEditingController();
   TextEditingController maxEntries = TextEditingController();
@@ -44,7 +44,7 @@ class _CreateEventViewState extends State<CreateEventView> {
     timeController.clear();
     titleController.clear();
     locationController.clear();
-    priceController.clear();
+    pointController.clear();
     descriptionController.clear();
     tagsController.clear();
     maxEntries.clear();
@@ -134,6 +134,10 @@ class _CreateEventViewState extends State<CreateEventView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Create Event'),
+        backgroundColor: AppColors.maincolor,
+      ),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 20),
@@ -141,7 +145,6 @@ class _CreateEventViewState extends State<CreateEventView> {
             key: formKey,
             child: Column(
               children: [
-                iconWithTitle(text: 'Create Event', func: () {}),
                 SizedBox(
                   height: Get.height * 0.02,
                 ),
@@ -886,14 +889,14 @@ class _CreateEventViewState extends State<CreateEventView> {
                     ),
                     iconTitleContainer(
                         path: 'assets/dollarLogo.png',
-                        text: 'price',
+                        text: 'points',
                         type: TextInputType.number,
                         height: 40,
-                        controller: priceController,
+                        controller: pointController,
                         onPress: () {},
                         validator: (String input) {
                           if (input.isEmpty) {
-                            Get.snackbar('Opps', "Price is required.",
+                            Get.snackbar('Opps', "Points is required.",
                                 colorText: Colors.white,
                                 backgroundColor: Colors.blue);
                             return '';
@@ -983,7 +986,7 @@ class _CreateEventViewState extends State<CreateEventView> {
                                 'joined': [
                                   FirebaseAuth.instance.currentUser!.uid
                                 ],
-                                'price': priceController.text,
+                                'point': pointController.text,
                                 'media': mediaUrls,
                                 'uid': FirebaseAuth.instance.currentUser!.uid,
                                 'tags': tags,

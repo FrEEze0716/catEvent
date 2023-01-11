@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../utils/app_color.dart';
-import '../../widgets/my_widgets.dart';
 import 'package:timeago/timeago.dart' as timeAgo;
 
 class UserNotificationScreen extends StatefulWidget {
@@ -17,20 +15,16 @@ class _UserNotificationScreenState extends State<UserNotificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Notification'),
+        backgroundColor: AppColors.maincolor,
+      ),
       body: Container(
         // padding: EdgeInsets.symmetric(horizontal: 10),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                margin: EdgeInsets.only(left: 10),
-                child: iconWithTitle(
-                    func: () {
-                      Get.back();
-                    },
-                    text: 'Notifications'),
-              ),
               Container(
                   color: Color(0xffEEEEEE).withOpacity(0.9),
                   padding: EdgeInsets.only(left: 15, right: 15, top: 10),

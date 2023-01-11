@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -53,6 +54,10 @@ class _CheckOutViewState extends State<CheckOutView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Join Event'),
+        backgroundColor: AppColors.maincolor,
+      ),
       body: SingleChildScrollView(
         child: Container(
           // height: Get.height,
@@ -60,45 +65,6 @@ class _CheckOutViewState extends State<CheckOutView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      width: 27,
-                      height: 27,
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/circle.png'),
-                        ),
-                      ),
-                      child: Image.asset('assets/bi_x-lg.png'),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 10,
-                    child: Center(
-                      child: myText(
-                        text: 'CheckOut',
-                        style: TextStyle(
-                          fontSize: 23,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.black,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text(''),
-                  )
-                ],
-              ),
               SizedBox(
                 height: 10,
               ),
@@ -149,18 +115,17 @@ class _CheckOutViewState extends State<CheckOutView> {
                                     color: AppColors.black,
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 25,
-                                ),
-                                myText(
-                                  text: 'may 15',
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w300,
-                                    color: AppColors.black,
-                                  ),
-                                ),
                               ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          myText(
+                            text: widget.eventDoc!.get('date'),
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w300,
                             ),
                           ),
                           SizedBox(
@@ -185,20 +150,21 @@ class _CheckOutViewState extends State<CheckOutView> {
                                   fontSize: 12,
                                   fontWeight: FontWeight.w300,
                                 ),
-                              )
+                              ),
                             ],
                           ),
                           SizedBox(
-                            height: 7,
+                            height: 10,
                           ),
                           myText(
-                            text: widget.eventDoc!.get('date'),
+                            text: widget.eventDoc!.get('start_time') +
+                                ' - ' +
+                                widget.eventDoc!.get('end_time'),
                             style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.blue,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w300,
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -208,174 +174,10 @@ class _CheckOutViewState extends State<CheckOutView> {
               SizedBox(
                 height: Get.height * 0.04,
               ),
-              myText(
-                text: 'Payment Method',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 16,
-                ),
-              ),
-              Row(
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 16,
-                        height: 12,
-                        child: Image.asset(
-                          'assets/Group1.png',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      myText(
-                        text: 'Add Card detail',
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Spacer(),
-                  Radio(
-                    value: 0,
-                    groupValue: selectedRadio,
-                    onChanged: (int? val) {
-                      setSelectedRadio(val!);
-                    },
-                  ),
-                ],
-              ),
-              textField(text: 'Card Number'),
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 48,
-                      margin: EdgeInsets.only(
-                        bottom: Get.height * 0.02,
-                      ),
-                      child: TextFormField(
-                        onTap: () {
-                          _selectDate(context);
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Expiration date',
-                          contentPadding: EdgeInsets.only(top: 10, left: 10),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: Get.width * 0.04,
-                  ),
-                  Expanded(child: textField(text: 'Security Code'))
-                ],
-              ),
-              SizedBox(
-                height: Get.height * 0.01,
-              ),
               Row(
                 children: [
                   myText(
-                    text: 'Other option',
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Spacer(),
-                  Radio(
-                    value: 1,
-                    groupValue: selectedRadio,
-                    onChanged: (int? value) {
-                      setState(() {
-                        setSelectedRadio(value!);
-                      });
-                    },
-                    activeColor: AppColors.blue,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(right: 10),
-                    width: 48,
-                    height: 34,
-                    child: Image.asset(
-                      'assets/paypal.png',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  myText(
-                    text: 'Paypal',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  Spacer(),
-                  Radio(
-                    value: 2,
-                    groupValue: selectedRadio,
-                    onChanged: (int? value) {
-                      setState(() {
-                        setSelectedRadio(value!);
-                      });
-                    },
-                    activeColor: AppColors.blue,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(right: 10),
-                    width: 48,
-                    height: 34,
-                    child: Image.asset(
-                      'assets/strip.png',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  myText(
-                    text: 'Strip',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  Spacer(),
-                  Radio(
-                    value: 3,
-                    groupValue: selectedRadio,
-                    onChanged: (int? value) {
-                      setState(() {
-                        setSelectedRadio(value!);
-                      });
-                    },
-                    activeColor: AppColors.blue,
-                  ),
-                ],
-              ),
-              Divider(),
-              Row(
-                children: [
-                  myText(
-                    text: 'Event Fee',
+                    text: 'Points Given: ',
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
@@ -383,7 +185,7 @@ class _CheckOutViewState extends State<CheckOutView> {
                   ),
                   Spacer(),
                   myText(
-                    text: '\$${widget.eventDoc!.get('price')}',
+                    text: '\$${widget.eventDoc!.get('point')}',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -403,7 +205,7 @@ class _CheckOutViewState extends State<CheckOutView> {
                   ),
                   Spacer(),
                   myText(
-                    text: '\$${int.parse(widget.eventDoc!.get('price')) + 2}',
+                    text: '\$${int.parse(widget.eventDoc!.get('point')) + 2}',
                     style: TextStyle(
                       fontSize: 16,
                       color: AppColors.blue,
@@ -421,11 +223,32 @@ class _CheckOutViewState extends State<CheckOutView> {
                 width: double.infinity,
                 child: elevatedButton(
                   onpress: () {
-                    if (selectedRadio == 3) {}
+                    FirebaseFirestore.instance
+                        .collection('events')
+                        .doc(widget.eventDoc!.id)
+                        .set({
+                      'joined': FieldValue.arrayUnion(
+                          [FirebaseAuth.instance.currentUser!.uid]),
+                      'max_entries': FieldValue.increment(-1),
+                    }, SetOptions(merge: true)).then(
+                      (value) {
+                        FirebaseFirestore.instance
+                            .collection('booking')
+                            .doc(widget.eventDoc!.id)
+                            .set({
+                          'booking': FieldValue.arrayUnion([
+                            {
+                              'uid': FirebaseAuth.instance.currentUser!.uid,
+                              'tickets': 1
+                            }
+                          ])
+                        });
+                      },
+                    );
                   },
-                  text: 'Book Now',
+                  text: 'Join Now',
                 ),
-              )
+              ),
             ],
           ),
         ),

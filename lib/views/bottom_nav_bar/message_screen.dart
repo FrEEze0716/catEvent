@@ -21,22 +21,14 @@ class _MessageScreenState extends State<MessageScreen> {
     var screenheight = MediaQuery.of(context).size.height;
     var screenwidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Chat Message'),
+        backgroundColor: const Color.fromRGBO(244, 147, 193, 1),
+      ),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Message",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 23,
-                        fontWeight: FontWeight.w600),
-                  ),
-                ],
-              ),
               SizedBox(
                 height: screenheight * 0.03,
               ),

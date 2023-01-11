@@ -8,7 +8,7 @@ import '../../widgets/my_widgets.dart';
 import '../profile/profile.dart';
 
 class LoginView extends StatefulWidget {
-  LoginView({Key? key}) : super(key: key);
+  const LoginView({Key? key}) : super(key: key);
 
   @override
   State<LoginView> createState() => _LoginViewState();
@@ -55,7 +55,7 @@ class _LoginViewState extends State<LoginView> {
                 isSignUp
                     ? myText(
                         text: 'Sign Up',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 23,
                           fontWeight: FontWeight.w600,
                         ),
@@ -138,7 +138,7 @@ class _LoginViewState extends State<LoginView> {
                   child: Form(
                     key: formKey,
                     child: TabBarView(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       children: [
                         LoginWidget(),
                         SignUpWidget(),
@@ -218,7 +218,7 @@ class _LoginViewState extends State<LoginView> {
                                 icon: 'assets/lock.png',
                                 text: 'enter your email...',
                                 controller: forgetEmailController),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             MaterialButton(
@@ -227,7 +227,7 @@ class _LoginViewState extends State<LoginView> {
                                 authController.forgetPassword(
                                     forgetEmailController.text.trim());
                               },
-                              child: Text("Sent"),
+                              child: const Text("Sent"),
                               minWidth: double.infinity,
                             )
                           ],
@@ -250,7 +250,7 @@ class _LoginViewState extends State<LoginView> {
             ],
           ),
           Obx(() => authController.isLoading.value
-              ? Center(
+              ? const Center(
                   child: CircularProgressIndicator(),
                 )
               : Container(
@@ -364,7 +364,7 @@ class _LoginViewState extends State<LoginView> {
             },
             controller: confirmPasswordController),
         Obx(() => authController.isLoading.value
-            ? Center(
+            ? const Center(
                 child: CircularProgressIndicator(),
               )
             : Container(
@@ -409,7 +409,7 @@ class _LoginViewState extends State<LoginView> {
             width: Get.width * 0.8,
             child: RichText(
               textAlign: TextAlign.center,
-              text: TextSpan(children: [
+              text: const TextSpan(children: [
                 TextSpan(
                     text: 'By signing up, you agree our ',
                     style: TextStyle(color: Color(0xff262628), fontSize: 12)),

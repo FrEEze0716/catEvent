@@ -1,107 +1,106 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../utils/app_color.dart';
 import 'auth/login_signup.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // SafeArea filling all the unusable space
     return SafeArea(
-        child: Scaffold(
-      body: Container(
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 50,
-            ),
-            Text(
-              "Welcome to EMS!",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 27,
-                fontWeight: FontWeight.w700,
+      child: Scaffold(
+        body: SizedBox(
+          // double.infinity taking full screen
+          width: double.infinity,
+
+          child: Column(
+            // main -> vertical
+            // cross -> horizontal
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+
+            // List of widgets for Column using children
+            children: [
+              // Add space between widget
+              const SizedBox(
+                height: 30,
               ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Text(
-              "Event Management System",
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 15, right: 15),
-              child: Image.asset('assets/onboardIcon.png'),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Expanded(
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black12, blurRadius: 5, spreadRadius: 2)
-                    ],
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(16),
-                        topLeft: Radius.circular(16))),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 15, right: 15),
-                      child: Text(
-                        "The social media platform designed to get you offline",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 15, right: 15),
-                      child: Text(
-                        "EMS is an app where users can leverage their social network to create, discover, share, and monetize events or services.",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 15, right: 15),
-                      child: MaterialButton(
-                        minWidth: double.infinity,
-                        color: Colors.white,
-                        elevation: 2,
-                        onPressed: () {
-                          Get.to(() => LoginView());
-                        },
-                        child: Text(
-                          "Get Started",
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Color(0xff274560),
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                    )
-                  ],
+
+              const Text(
+                "Welcome to cuzVcare!",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 30,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
-            ),
-          ],
+
+              const SizedBox(
+                height: 5,
+              ),
+
+              const Text(
+                "Volunteer Recruitment Application",
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+
+              const SizedBox(
+                height: 30,
+              ),
+
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.asset('assets/logo/Logo.png'),
+              ),
+
+              const SizedBox(
+                height: 30,
+              ),
+
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: MaterialButton(
+                  minWidth: double.infinity,
+                  height: 50,
+                  color: AppColors.maincolor,
+                  elevation: 2,
+                  onPressed: () {
+                    Get.to(() => const LoginView());
+                  },
+                  child: const Text(
+                    "Get Started",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              )
+
+              /*
+              // Expanded Take all the remaining space
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  height: 100,
+                  decoration: const BoxDecoration(
+                    color: Colors.pinkAccent,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(16),
+                      topRight: Radius.circular(16),
+                    ),
+                  ),
+                ),
+              )
+              */
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 }

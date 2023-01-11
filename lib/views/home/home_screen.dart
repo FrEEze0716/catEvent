@@ -1,10 +1,14 @@
+import 'package:catevent/utils/app_color.dart';
+import 'package:catevent/views/bottom_nav_bar/nav_drawer.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../controller/data_controller.dart';
-import '../../widgets/custom_app_bar.dart';
+import '../../services/notification_service.dart';
 import '../../widgets/events_feed_widget.dart';
+import '../notification_screen/notification_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -12,22 +16,47 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  DataController dataController = Get.find<DataController>();
+  @override
+  void initState() {
+    super.initState();
+    Get.put(DataController(), permanent: true);
+    FirebaseMessaging.instance.getInitialMessage();
+    FirebaseMessaging.onMessage.listen((message) {
+      LocalNotificationService.display(message);
+    });
+
+    LocalNotificationService.storeToken();
+  }
 
   @override
   Widget build(BuildContext context) {
+    DataController dataController = Get.find<DataController>();
     return Scaffold(
-      backgroundColor: Colors.black.withOpacity(0.03),
+      appBar: AppBar(
+        title: const Text('cuzVcare - Home'),
+        backgroundColor: AppColors.maincolor,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.notifications_none_outlined),
+            onPressed: () {
+              Get.to(() => UserNotificationScreen());
+            },
+          ),
+        ],
+      ),
+      drawer: const NavDrawer(),
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           height: double.infinity,
           width: double.infinity,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomAppBar(),
+                SizedBox(
+                  height: Get.height * 0.02,
+                ),
                 Text(
                   "What Going on today",
                   style: GoogleFonts.raleway(
@@ -37,11 +66,37 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: Get.height * 0.02,
                 ),
                 EventsFeed(),
-                Obx(() => dataController.isUsersLoading.value
-                    ? Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : EventsIJoined())
+                Obx(
+                  () => dataController.isUsersLoading.value
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 50,
+                              height: 50,
+                              padding: EdgeInsets.all(10),
+                              child: Image.asset(
+                                'assets/doneCircle.png',
+                                fit: BoxFit.cover,
+                                color: AppColors.blue,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Text(
+                              'You\'re all caught up!',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        ),
+                )
               ],
             ),
           ),

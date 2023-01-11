@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controller/data_controller.dart';
+import '../../utils/app_color.dart';
 import '../../widgets/my_widgets.dart';
 
 class CommunityScreen extends StatefulWidget {
@@ -17,17 +18,21 @@ class _CommunityScreenState extends State<CommunityScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var screenheight = MediaQuery.of(context).size.height;
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Community'),
+        backgroundColor: AppColors.maincolor,
+      ),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
           // height: Get.height,
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
-              iconWithTitle(
-                func: () {},
-                text: 'Community',
+              SizedBox(
+                height: screenheight * 0.03,
               ),
               Container(
                 height: 50,
@@ -81,32 +86,33 @@ class _CommunityScreenState extends State<CommunityScreen> {
                     prefixIcon: Container(
                       width: 15,
                       height: 15,
-                      padding: EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(15),
                       child: Image.asset(
                         'assets/search.png',
                         fit: BoxFit.cover,
                       ),
                     ),
-                    hintText: 'Austin,USA',
-                    hintStyle: TextStyle(
+                    hintText: 'Penang',
+                    hintStyle: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Obx(() => GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 30,
-                        childAspectRatio: 0.53),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 30,
+                            childAspectRatio: 0.53),
                     shrinkWrap: true,
                     itemCount: dataController.filteredEvents.length,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, i) {
                       String userName = '',
                           userImage = '',
@@ -185,25 +191,25 @@ class _CommunityScreenState extends State<CommunityScreen> {
                               userProfile(
                                 path: userImage,
                                 title: userName,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 11,
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xff333333),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5,
                               ),
                               Row(
                                 children: [
                                   Image.asset('assets/location.png'),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
                                   Expanded(
                                     child: myText(
                                       text: location,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 10,
                                         fontWeight: FontWeight.w500,
                                         color: Color(0xff303030),
@@ -212,7 +218,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               ClipRRect(
@@ -224,22 +230,22 @@ class _CommunityScreenState extends State<CommunityScreen> {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               myText(
                                 text: eventName,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 10,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               myText(
                                 text: tagString,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 10,
                                   fontWeight: FontWeight.w400,
                                   color: Colors.blue,

@@ -104,38 +104,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     var screenheight = MediaQuery.of(context).size.height;
     var screenwidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('User Profile'),
+        backgroundColor: const Color.fromRGBO(244, 147, 193, 1),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Stack(
             children: [
-              Align(
-                alignment: Alignment.topRight,
-                child: Container(
-                  width: 100,
-                  margin: EdgeInsets.only(
-                      left: Get.width * 0.75, top: 20, right: 20),
-                  alignment: Alignment.topRight,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        onTap: () {},
-                        child: Image(
-                          image: AssetImage('assets/sms.png'),
-                          width: 28,
-                          height: 25,
-                        ),
-                      ),
-                      Image(
-                        image: AssetImage('assets/menu.png'),
-                        width: 23.33,
-                        height: 19,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
               Align(
                 child: Container(
                   margin: EdgeInsets.symmetric(vertical: 90, horizontal: 20),

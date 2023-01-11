@@ -89,6 +89,7 @@ class _ChatState extends State<Chat> {
               width: 5,
             ),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 myText(
                   text: widget.name,
@@ -98,8 +99,8 @@ class _ChatState extends State<Chat> {
                     color: AppColors.black,
                   ),
                 ),
-                myText(
-                  text: 'sara_smith',
+                const Text(
+                  'online',
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,

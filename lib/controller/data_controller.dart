@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:path/path.dart' as Path;
+import 'package:path/path.dart' as pathv;
 
 class DataController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -46,13 +46,14 @@ class DataController extends GetxController {
         .doc(recUid)
         .collection('myNotifications')
         .add({
-      'message': "Send you a message.",
+      'message': "\tSend you a message.",
       'image': myDocument!.get('image'),
       'name': myDocument!.get('first') + " " + myDocument!.get('last'),
       'time': DateTime.now()
     });
   }
 
+  // Fetch all users and events
   getMyDocument() {
     FirebaseFirestore.instance
         .collection('users')
@@ -65,7 +66,7 @@ class DataController extends GetxController {
 
   Future<String> uploadImageToFirebase(File file) async {
     String fileUrl = '';
-    String fileName = Path.basename(file.path);
+    String fileName = pathv.basename(file.path);
     var reference = FirebaseStorage.instance.ref().child('myfiles/$fileName');
     UploadTask uploadTask = reference.putFile(file);
     TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => null);

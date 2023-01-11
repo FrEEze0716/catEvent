@@ -5,33 +5,22 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../controller/data_controller.dart';
-import '../model/ticket_model.dart';
 import '../utils/app_color.dart';
 import '../views/event_page/event_page_view.dart';
 import '../views/profile/profile.dart';
 
-List<AustinYogaWork> austin = [
-  AustinYogaWork(rangeText: '7-8', title: 'CONCERN'),
-  AustinYogaWork(rangeText: '8-9', title: 'VINYASA'),
-  AustinYogaWork(rangeText: '9-10', title: 'MEDITATION'),
-];
-List<String> imageList = [
-  'assets/#1.png',
-  'assets/#2.png',
-  'assets/#3.png',
-  'assets/#1.png',
-];
-
 Widget EventsFeed() {
   DataController dataController = Get.find<DataController>();
 
+  // if loading, show progress indicator
   return Obx(() => dataController.isEventsLoading.value
       ? Center(
           child: CircularProgressIndicator(),
         )
       : ListView.builder(
+          // Make it scrollable when list increasing
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (ctx, i) {
             return EventItem(dataController.allEvents[i]);
           },
@@ -82,7 +71,7 @@ Widget buildCard(
   }
 
   return Container(
-    padding: EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 10),
+    padding: const EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 10),
     decoration: BoxDecoration(
       color: AppColors.white,
       borderRadius: BorderRadius.circular(17),
@@ -116,7 +105,7 @@ Widget buildCard(
             //color: Colors.red,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Container(
@@ -133,13 +122,13 @@ Widget buildCard(
                     border: Border.all(color: Color(0xffADD8E6))),
                 child: Text(
                   '${dateInformation[0]}-${dateInformation[1]}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 18,
               ),
               Text(
@@ -220,7 +209,7 @@ Widget buildCard(
         ),
         Row(
           children: [
-            SizedBox(
+            const SizedBox(
               width: 68,
             ),
             InkWell(
@@ -327,6 +316,7 @@ EventItem(DocumentSnapshot event) {
 
   String image = '';
 
+  // Give empty string if not found
   try {
     image = user.get('image');
   } catch (e) {
@@ -407,34 +397,6 @@ EventsIJoined() {
 
   return Column(
     children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 50,
-            height: 50,
-            padding: EdgeInsets.all(10),
-            child: Image.asset(
-              'assets/doneCircle.png',
-              fit: BoxFit.cover,
-              color: AppColors.blue,
-            ),
-          ),
-          SizedBox(
-            width: 15,
-          ),
-          Text(
-            'You\'re all caught up!',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ],
-      ),
-      SizedBox(
-        height: Get.height * 0.015,
-      ),
       Container(
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(

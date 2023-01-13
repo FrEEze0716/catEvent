@@ -54,6 +54,7 @@ dependencies:
   timeago:
   intl:
   http:
+  path:
 
 dev_dependencies:
   flutter_test:

@@ -1,17 +1,17 @@
-import 'package:catevent/utils/app_color.dart';
-import 'package:catevent/views/check_out/my_activity.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controller/data_controller.dart';
+import '../../utils/app_color.dart';
 import '../about.dart';
+import '../my_activity/my_activity.dart';
 import '../community/community.dart';
 import '../home/home_screen.dart';
 import '../profile/profile.dart';
-import 'create_event.dart';
-import 'message_screen.dart';
+import '../event_page/create_event.dart';
+import '../chat/message_screen.dart';
 
 class NavDrawer extends StatefulWidget {
   const NavDrawer({super.key});

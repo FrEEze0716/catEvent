@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controller/data_controller.dart';
-import '../chat/chat_room_screen.dart';
+import 'chat_room_screen.dart';
 
 class MessageScreen extends StatefulWidget {
   @override

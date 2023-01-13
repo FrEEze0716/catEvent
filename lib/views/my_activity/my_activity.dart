@@ -1,5 +1,5 @@
-import 'package:catevent/views/check_out/my_activity_past.dart';
-import 'package:catevent/views/check_out/my_activity_upcoming.dart';
+import 'package:catevent/views/my_activity/my_activity_past.dart';
+import 'package:catevent/views/my_activity/my_activity_upcoming.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/app_color.dart';

@@ -6,9 +6,9 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../views/bottom_nav_bar/bottom_bar_view.dart';
+import '../views/home/home_screen.dart';
 import '../views/profile/add_profile.dart';
-import 'package:path/path.dart' as Path;
+import 'package:path/path.dart' as p;
 
 class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -23,7 +23,7 @@ class AuthController extends GetxController {
         .then((value) {
       /// Login Success
       isLoading(false);
-      Get.to(() => BottomBarView());
+      Get.to(() => HomeScreen());
     }).catchError((e) {
       isLoading(false);
       Get.snackbar('Error', "$e");
@@ -81,7 +81,7 @@ class AuthController extends GetxController {
       isLoading(false);
 
       ///SuccessFull loged in
-      Get.to(() => BottomBarView());
+      Get.to(() => HomeScreen());
     }).catchError((e) {
       /// Error in getting Login
       isLoading(false);
@@ -93,7 +93,7 @@ class AuthController extends GetxController {
 
   Future<String> uploadImageToFirebaseStorage(File image) async {
     String imageUrl = '';
-    String fileName = Path.basename(image.path);
+    String fileName = p.basename(image.path);
 
     var reference =
         FirebaseStorage.instance.ref().child('profileImages/$fileName');
@@ -120,7 +120,7 @@ class AuthController extends GetxController {
       'gender': gender
     }).then((value) {
       isProfileInformationLoading(false);
-      Get.offAll(() => BottomBarView());
+      Get.offAll(() => HomeScreen());
     });
   }
 }

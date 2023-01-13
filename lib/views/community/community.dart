@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../controller/data_controller.dart';
 import '../../utils/app_color.dart';
 import '../../widgets/my_widgets.dart';
+import '../event_page/event_page_view.dart';
 
 class CommunityScreen extends StatefulWidget {
   @override
@@ -183,7 +184,10 @@ class _CommunityScreenState extends State<CommunityScreen> {
                       }
 
                       return InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(() => EventPageView(
+                              dataController.filteredEvents.value[i], doc));
+                        },
                         child: Container(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,

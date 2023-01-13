@@ -1,4 +1,3 @@
-import 'package:catevent/views/home/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -10,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'services/notification_service.dart';
 import 'utils/app_constants.dart';
+import 'views/home/home_screen.dart';
 import 'views/onboarding_screen.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {

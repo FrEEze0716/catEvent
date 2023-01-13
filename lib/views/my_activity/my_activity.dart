@@ -1,8 +1,8 @@
-import 'package:catevent/views/my_activity/my_activity_past.dart';
-import 'package:catevent/views/my_activity/my_activity_upcoming.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/app_color.dart';
+import 'my_activity_bookmark.dart';
+import 'my_activity_joined.dart';
 
 class MyActivity extends StatelessWidget {
   const MyActivity({super.key});
@@ -14,8 +14,8 @@ class MyActivity extends StatelessWidget {
         labelColor: Color.fromRGBO(252, 192, 211, 1),
         unselectedLabelColor: Colors.black,
         tabs: [
-          Tab(text: 'Upcoming'),
-          Tab(text: 'Past'),
+          Tab(text: 'Joined'),
+          Tab(text: 'Bookmark'),
         ],
       );
 
@@ -38,8 +38,8 @@ class MyActivity extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            MyActivityUpcoming(),
-            MyActivityPast(),
+            MyActivityJoined(),
+            MyActivityBookmark(),
           ],
         ),
       ),

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
 import '../../utils/app_color.dart';
-import 'my_activity_bookmark.dart';
-import 'my_activity_joined.dart';
+import 'redeem_reward.dart';
+import 'view_reward.dart';
 
-class MyActivity extends StatelessWidget {
-  const MyActivity({super.key});
+class Reward extends StatefulWidget {
+  const Reward({super.key});
 
+  @override
+  State<Reward> createState() => _RewardState();
+}
+
+class _RewardState extends State<Reward> {
   TabBar get _tabBar => const TabBar(
         indicatorWeight: 5,
         indicatorSize: TabBarIndicatorSize.tab,
@@ -14,8 +19,8 @@ class MyActivity extends StatelessWidget {
         labelColor: Colors.blueGrey,
         unselectedLabelColor: Colors.black,
         tabs: [
-          Tab(text: 'Joined'),
-          Tab(text: 'Bookmark'),
+          Tab(text: 'View'),
+          Tab(text: 'Redeemed'),
         ],
       );
 
@@ -26,7 +31,7 @@ class MyActivity extends StatelessWidget {
       child: Scaffold(
         // drawer: const NavDrawer(),
         appBar: AppBar(
-          title: const Text('My Activity'),
+          title: const Text('Rewards'),
           backgroundColor: AppColors.maincolor,
           bottom: PreferredSize(
             preferredSize: _tabBar.preferredSize,
@@ -36,10 +41,10 @@ class MyActivity extends StatelessWidget {
             ),
           ),
         ),
-        body: const TabBarView(
+        body: TabBarView(
           children: [
-            MyActivityJoined(),
-            MyActivityBookmark(),
+            ViewReward(),
+            RedeemReward(),
           ],
         ),
       ),

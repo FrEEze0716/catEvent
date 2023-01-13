@@ -1,3 +1,4 @@
+import 'package:catevent/views/reward/create_reward.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ import '../home/home_screen.dart';
 import '../profile/profile.dart';
 import '../event_page/create_event.dart';
 import '../chat/message_screen.dart';
+import '../reward/reward.dart';
 
 class NavDrawer extends StatefulWidget {
   const NavDrawer({super.key});
@@ -136,9 +138,30 @@ class _NavDrawerState extends State<NavDrawer> {
           },
         ),
         ListTile(
+          leading: const Icon(Icons.playlist_add_outlined),
+          title: const Text('Create Reward'),
+          onTap: () {
+            Navigator.pop(context);
+
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => CreateReward(),
+              ),
+            );
+          },
+        ),
+        ListTile(
           leading: const Icon(Icons.card_giftcard_outlined),
-          title: const Text('Rewards'),
-          onTap: () {},
+          title: const Text('View Rewards'),
+          onTap: () {
+            Navigator.pop(context);
+
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => Reward(),
+              ),
+            );
+          },
         ),
         ListTile(
           leading: const Icon(Icons.volunteer_activism_outlined),

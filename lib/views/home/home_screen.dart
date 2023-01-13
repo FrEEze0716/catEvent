@@ -84,10 +84,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: AppColors.blue,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 15,
                             ),
-                            Text(
+                            const Text(
                               'You\'re all caught up!',
                               style: TextStyle(
                                 fontSize: 18,

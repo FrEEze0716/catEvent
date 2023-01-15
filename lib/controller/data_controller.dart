@@ -22,6 +22,7 @@ class DataController extends GetxController {
 
   var allRewards = <DocumentSnapshot>[].obs;
   var filteredRewards = <DocumentSnapshot>[].obs;
+  var redempRewards = <DocumentSnapshot>[].obs;
 
   var isEventsLoading = false.obs;
   var isRewardsLoading = false.obs;
@@ -140,6 +141,7 @@ class DataController extends GetxController {
     getEvents();
     getBookmarkEvents();
     getRewards();
+    getRedempRewards();
   }
 
   var isUsersLoading = false.obs;
@@ -195,6 +197,26 @@ class DataController extends GetxController {
         .snapshots()
         .listen((reward) {
       allRewards.assignAll(reward.docs);
+
+      isRewardsLoading(false);
+    });
+  }
+
+  getRedempRewards() {
+    isRewardsLoading(true);
+
+    FirebaseFirestore.instance
+        .collection('rewards')
+        .snapshots()
+        .listen((reward) {
+      allRewards.assignAll(reward.docs);
+      filteredRewards.assignAll(reward.docs);
+
+      redempRewards.value = allRewards.where((e) {
+        List redeemIds = e.get('redeemed');
+
+        return redeemIds.contains(FirebaseAuth.instance.currentUser!.uid);
+      }).toList();
 
       isRewardsLoading(false);
     });

@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../views/admin/admin.dart';
 import '../views/home/home_screen.dart';
 import '../views/profile/add_profile.dart';
 import 'package:path/path.dart' as p;
@@ -23,7 +24,13 @@ class AuthController extends GetxController {
         .then((value) {
       /// Login Success
       isLoading(false);
-      Get.to(() => HomeScreen());
+      if (email == "kohyungkwang@gmail.com" ||
+          FirebaseAuth.instance.currentUser!.uid ==
+              "7VS9cOQGxgVvtl4NHSXbhVqwjpN2") {
+        Get.to(() => AdminHomeScreen());
+      } else {
+        Get.to(() => HomeScreen());
+      }
     }).catchError((e) {
       isLoading(false);
       Get.snackbar('Error', "$e");

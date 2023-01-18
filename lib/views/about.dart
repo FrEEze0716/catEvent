@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
+import '../utils/app_color.dart';
+
 class About extends StatelessWidget {
   const About({super.key});
 
@@ -9,7 +11,7 @@ class About extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('About Us'),
-        backgroundColor: const Color.fromRGBO(244, 147, 193, 1),
+        backgroundColor: AppColors.maincolor,
       ),
       body: Container(
         width: double.infinity,

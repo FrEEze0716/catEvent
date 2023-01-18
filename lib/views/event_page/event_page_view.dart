@@ -191,13 +191,13 @@ class _EventPageViewState extends State<EventPageView> {
                               EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                           child: Text(
                             '${widget.eventData.get('start_time')}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 10,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Text(
@@ -207,12 +207,12 @@ class _EventPageViewState extends State<EventPageView> {
                               color: AppColors.black,
                               fontWeight: FontWeight.w600),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Text(
                           "${widget.eventData.get('date')}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 13,
                             color: Colors.black,
                             fontWeight: FontWeight.w300,
@@ -220,7 +220,7 @@ class _EventPageViewState extends State<EventPageView> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
@@ -228,7 +228,7 @@ class _EventPageViewState extends State<EventPageView> {
                         Image.asset(
                           'assets/location.png',
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         Text(
@@ -241,7 +241,7 @@ class _EventPageViewState extends State<EventPageView> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Container(
@@ -255,7 +255,7 @@ class _EventPageViewState extends State<EventPageView> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Container(
@@ -370,7 +370,7 @@ class _EventPageViewState extends State<EventPageView> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
@@ -379,7 +379,7 @@ class _EventPageViewState extends State<EventPageView> {
                           child: Text(
                             tagsCollectively,
                             maxLines: 2,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w500,
                             ),
@@ -387,7 +387,7 @@ class _EventPageViewState extends State<EventPageView> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
@@ -511,7 +511,7 @@ class _EventPageViewState extends State<EventPageView> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 25,
                     ),
                   ],

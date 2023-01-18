@@ -66,7 +66,7 @@ class _CheckOutViewState extends State<CheckOutView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Container(
@@ -119,17 +119,17 @@ class _CheckOutViewState extends State<CheckOutView> {
                               ],
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           myText(
                             text: widget.eventDoc!.get('date'),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w300,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Row(
@@ -142,26 +142,26 @@ class _CheckOutViewState extends State<CheckOutView> {
                                   fit: BoxFit.fill,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               myText(
                                 text: widget.eventDoc!.get('location'),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w300,
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           myText(
                             text: widget.eventDoc!.get('start_time') +
                                 ' - ' +
                                 widget.eventDoc!.get('end_time'),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w300,
                             ),

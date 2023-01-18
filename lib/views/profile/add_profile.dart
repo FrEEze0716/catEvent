@@ -59,7 +59,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   size: 30,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               InkWell(

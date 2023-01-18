@@ -25,7 +25,7 @@ class _LogoutViewState extends State<LogoutView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Are you sure you want to log out?\n"),
+            const Text("Are you sure you want to log out?\n"),
             Container(
               height: 40,
               width: 200,

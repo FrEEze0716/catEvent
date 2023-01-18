@@ -233,7 +233,7 @@ class _CreateEventViewState extends State<CreateEventView> {
                               fontWeight: FontWeight.w400,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
                           elevatedButton(
@@ -248,7 +248,7 @@ class _CreateEventViewState extends State<CreateEventView> {
                 ),
                 media.length == 0
                     ? Container()
-                    : SizedBox(
+                    : const SizedBox(
                         height: 20,
                       ),
 
@@ -348,7 +348,7 @@ class _CreateEventViewState extends State<CreateEventView> {
                             scrollDirection: Axis.horizontal),
                       ),
 
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 myTextField(
@@ -374,7 +374,7 @@ class _CreateEventViewState extends State<CreateEventView> {
                       return null;
                     }),
 
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 myTextField(
@@ -398,7 +398,7 @@ class _CreateEventViewState extends State<CreateEventView> {
                       }
                       return null;
                     }),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Row(
@@ -439,7 +439,7 @@ class _CreateEventViewState extends State<CreateEventView> {
                         }),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
 
@@ -460,7 +460,7 @@ class _CreateEventViewState extends State<CreateEventView> {
                       return null;
                     }),
 
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
 
@@ -492,7 +492,7 @@ class _CreateEventViewState extends State<CreateEventView> {
                                 children: [
                                   selectedFrequency == 10
                                       ? Container()
-                                      : SizedBox(
+                                      : const SizedBox(
                                           width: 5,
                                         ),
                                   Expanded(
@@ -524,7 +524,7 @@ class _CreateEventViewState extends State<CreateEventView> {
                                   )),
                                   selectedFrequency == 10
                                       ? Container()
-                                      : SizedBox(
+                                      : const SizedBox(
                                           width: 5,
                                         ),
                                   Expanded(
@@ -556,7 +556,7 @@ class _CreateEventViewState extends State<CreateEventView> {
                                   )),
                                   selectedFrequency == 10
                                       ? Container()
-                                      : SizedBox(
+                                      : const SizedBox(
                                           width: 10,
                                         ),
                                   Expanded(
@@ -588,7 +588,7 @@ class _CreateEventViewState extends State<CreateEventView> {
                                   )),
                                   selectedFrequency == 10
                                       ? Container()
-                                      : SizedBox(
+                                      : const SizedBox(
                                           width: 10,
                                         ),
                                 ],
@@ -599,7 +599,7 @@ class _CreateEventViewState extends State<CreateEventView> {
                                 children: [
                                   selectedFrequency == 10
                                       ? Container()
-                                      : SizedBox(
+                                      : const SizedBox(
                                           width: 10,
                                         ),
                                   Expanded(
@@ -631,7 +631,7 @@ class _CreateEventViewState extends State<CreateEventView> {
                                   )),
                                   selectedFrequency == 10
                                       ? Container()
-                                      : SizedBox(
+                                      : const SizedBox(
                                           width: 10,
                                         ),
                                   Expanded(
@@ -663,7 +663,7 @@ class _CreateEventViewState extends State<CreateEventView> {
                                   )),
                                   selectedFrequency == 10
                                       ? Container()
-                                      : SizedBox(
+                                      : const SizedBox(
                                           width: 5,
                                         ),
                                 ],
@@ -687,7 +687,7 @@ class _CreateEventViewState extends State<CreateEventView> {
                                                           : 'Yearly';
                                       Get.back();
                                     },
-                                    child: Text(
+                                    child: const Text(
                                       "Select",
                                       style: TextStyle(color: Colors.white),
                                     ),
@@ -740,7 +740,7 @@ class _CreateEventViewState extends State<CreateEventView> {
                 //       }
                 //     }
                 // ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Row(
@@ -766,20 +766,20 @@ class _CreateEventViewState extends State<CreateEventView> {
                         }),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Row(
                   children: [
                     myText(
                         text: 'Description/Instruction',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
                         ))
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Container(
@@ -823,7 +823,7 @@ class _CreateEventViewState extends State<CreateEventView> {
                   alignment: Alignment.topLeft,
                   child: myText(
                     text: 'Who can invite?',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
                     ),
@@ -877,7 +877,7 @@ class _CreateEventViewState extends State<CreateEventView> {
                             value: value,
                             child: Text(
                               value,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xffA6A6A6),

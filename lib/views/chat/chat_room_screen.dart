@@ -85,7 +85,7 @@ class _ChatState extends State<Chat> {
                     radius: 20,
                     backgroundImage: NetworkImage(widget.image!),
                   ),
-            SizedBox(
+            const SizedBox(
               width: 5,
             ),
             Column(
@@ -220,7 +220,7 @@ class _ChatState extends State<Chat> {
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       InkWell(
@@ -231,7 +231,7 @@ class _ChatState extends State<Chat> {
                         },
                         child: Icon(Icons.tag_faces_outlined),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Expanded(
@@ -317,7 +317,7 @@ class _ChatState extends State<Chat> {
                 ),
                 Offstage(
                   offstage: !isEmojiPickerOpen,
-                  child: SizedBox(
+                  child: const SizedBox(
                     height: 230,
                     /*
                     child: EmojiPicker(
@@ -521,7 +521,7 @@ class _ChatState extends State<Chat> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Row(
@@ -591,7 +591,7 @@ class _ChatState extends State<Chat> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Row(
@@ -810,7 +810,7 @@ class _ChatState extends State<Chat> {
                   padding: const EdgeInsets.all(12),
                   child: Text(
                     reply,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -889,7 +889,7 @@ class _ChatState extends State<Chat> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Choose'),
+          title: const Text('Choose'),
           content: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -924,7 +924,7 @@ class _ChatState extends State<Chat> {
                   size: 30,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               InkWell(

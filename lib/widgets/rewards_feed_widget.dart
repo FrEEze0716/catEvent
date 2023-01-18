@@ -8,206 +8,173 @@ import '../utils/app_color.dart';
 import '../views/reward/reward.dart';
 import 'my_widgets.dart';
 
-// Display all rewards
-RewardItem() {
+Widget RewardsFeed() {
   DataController dataController = Get.find<DataController>();
-  DocumentSnapshot? rewardDoc;
+
+  // if loading, show progress indicator
+  return Obx(() => dataController.isRewardsLoading.value
+      ? Center(
+          child: CircularProgressIndicator(),
+        )
+      : ListView.builder(
+          // Make it scrollable when list increasing
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (ctx, i) {
+            return RewardItem(dataController.allRewards[i]);
+          },
+          itemCount: dataController.allRewards.length,
+        ));
+}
+
+Widget buildCard({String? image, text, DocumentSnapshot? rewardData}) {
+  String startdate = rewardData!.get('start_date');
+
+  String enddate = rewardData.get('end_date');
+
+  String point = rewardData.get('point');
+
+  List redeemed = [];
 
   return Column(
     children: [
-      Container(
-        decoration: BoxDecoration(boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
-            spreadRadius: 1,
-            blurRadius: 10,
-            offset: Offset(0, 1), // changes position of shadow
-          ),
-        ], color: Colors.white, borderRadius: BorderRadius.circular(8)),
-        padding: EdgeInsets.all(10),
-        width: double.infinity,
-        child: Column(
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
           children: [
-            Obx(
-              () => dataController.isRewardsLoading.value
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : ListView.builder(
-                      itemCount: dataController.allRewards.length,
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, i) {
-                        String name =
-                            dataController.allRewards[i].get('reward_name');
-
-                        String startdate =
-                            dataController.allRewards[i].get('start_date');
-
-                        String enddate =
-                            dataController.allRewards[i].get('end_date');
-
-                        String point =
-                            dataController.allRewards[i].get('point');
-
-                        String rewardImage = '';
-                        try {
-                          List media =
-                              dataController.allRewards[i].get('media') as List;
-                          Map mediaItem = media.firstWhere(
-                              (element) => element['isImage'] == true) as Map;
-                          rewardImage = mediaItem['url'];
-                        } catch (e) {
-                          rewardImage = '';
-                        }
-
-                        return Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    width: 150,
-                                    height: 100,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(10),
-                                        bottomLeft: Radius.circular(10),
-                                      ),
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: NetworkImage(rewardImage),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          name,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 16,
-                                            color: AppColors.black,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                          '$startdate until $enddate',
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w500,
-                                            color: AppColors.black,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Container(
-                                          width: 200,
-                                          height: 24,
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            border: Border.all(
-                                              color: Color(0xffADD8E6),
-                                            ),
-                                          ),
-                                          child: Text(
-                                            '$point points required',
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500,
-                                              color: AppColors.black,
-                                            ),
-                                          ),
-                                        ),
-                                        elevatedButton(
-                                          text: 'Redeem',
-                                          onpress: () {
-                                            FirebaseFirestore.instance
-                                                .collection('rewards')
-                                                .doc(rewardDoc!.id)
-                                                .set({
-                                              'redeemed':
-                                                  FieldValue.arrayUnion([
-                                                FirebaseAuth
-                                                    .instance.currentUser!.uid
-                                              ]),
-                                              'numRedeem':
-                                                  FieldValue.increment(-1),
-                                            }, SetOptions(merge: true)).then(
-                                              (value) {
-                                                FirebaseFirestore.instance
-                                                    .collection('redemption')
-                                                    .doc(rewardDoc.id)
-                                                    .set({
-                                                  'redemption':
-                                                      FieldValue.arrayUnion([
-                                                    {
-                                                      'uid': FirebaseAuth
-                                                          .instance
-                                                          .currentUser!
-                                                          .uid,
-                                                      'tickets': 1
-                                                    }
-                                                  ])
-                                                });
-                                              },
-                                            );
-                                            Get.to(() => Reward());
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Divider(
-                              color: Colors.grey,
-                            ),
-                          ],
-                        );
-                      },
-                    ),
+            Container(
+              width: 150,
+              height: 100,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  bottomLeft: Radius.circular(10),
+                ),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(image!),
+                ),
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 50,
-                  height: 50,
-                  padding: EdgeInsets.all(10),
-                  child: Image.asset(
-                    'assets/doneCircle.png',
-                    fit: BoxFit.cover,
-                    color: AppColors.blue,
+            const SizedBox(
+              width: 20,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    text,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                      color: AppColors.black,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  width: 15,
-                ),
-                const Text(
-                  'You\'re all caught up!',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
+                  const SizedBox(
+                    height: 10,
                   ),
-                ),
-              ],
+                  Text(
+                    '$startdate until $enddate',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.black,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    width: 200,
+                    height: 24,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      border: Border.all(
+                        color: Color(0xffADD8E6),
+                      ),
+                    ),
+                    child: Text(
+                      '$point points required',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.black,
+                      ),
+                    ),
+                  ),
+                  elevatedButton(
+                    text: 'Redeem',
+                    onpress: () {
+                      if (!redeemed
+                          .contains(FirebaseAuth.instance.currentUser!.uid)) {
+                        FirebaseFirestore.instance
+                            .collection('rewards')
+                            .doc(rewardData.id)
+                            .set({
+                          'redeemed': FieldValue.arrayUnion(
+                              [FirebaseAuth.instance.currentUser!.uid]),
+                          'numRedeem': FieldValue.increment(-1),
+                        }, SetOptions(merge: true)).then(
+                          (value) {
+                            FirebaseFirestore.instance
+                                .collection('redemption')
+                                .doc(rewardData.id)
+                                .set({
+                              'redemption': FieldValue.arrayUnion([
+                                {
+                                  'uid': FirebaseAuth.instance.currentUser!.uid,
+                                  'tickets': 1
+                                }
+                              ])
+                            });
+                          },
+                        );
+                        Get.snackbar('Reward is redeemed successfully',
+                            "View your redeemed rewards in the Redeemed tab.",
+                            colorText: Colors.white,
+                            backgroundColor: Colors.blue);
+                      } else {
+                        Get.snackbar('Sorry', "The reward was redeemed.",
+                            colorText: Colors.white,
+                            backgroundColor: Colors.blue);
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         ),
+      ),
+      const Divider(
+        color: Colors.grey,
+      ),
+    ],
+  );
+}
+
+RewardItem(DocumentSnapshot reward) {
+  String rewardImage = '';
+  try {
+    List media = reward.get('media') as List;
+    Map mediaItem =
+        media.firstWhere((element) => element['isImage'] == true) as Map;
+    rewardImage = mediaItem['url'];
+  } catch (e) {
+    rewardImage = '';
+  }
+
+  return Column(
+    children: [
+      buildCard(
+        image: rewardImage,
+        text: reward.get('reward_name'),
+        rewardData: reward,
+      ),
+      const SizedBox(
+        height: 15,
       ),
     ],
   );

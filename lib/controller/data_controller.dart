@@ -18,8 +18,14 @@ class DataController extends GetxController {
   var allEvents = <DocumentSnapshot>[].obs;
   var filteredEvents = <DocumentSnapshot>[].obs;
   var joinedEvents = <DocumentSnapshot>[].obs;
+  var savesEvents = <DocumentSnapshot>[].obs;
+
+  var allRewards = <DocumentSnapshot>[].obs;
+  var filteredRewards = <DocumentSnapshot>[].obs;
+  var redempRewards = <DocumentSnapshot>[].obs;
 
   var isEventsLoading = false.obs;
+  var isRewardsLoading = false.obs;
 
   var isMessageSending = false.obs;
   sendMessageToFirebase(
@@ -110,12 +116,32 @@ class DataController extends GetxController {
     return isCompleted;
   }
 
+  Future<bool> createReward(Map<String, dynamic> rewardData) async {
+    bool isCompleted = false;
+
+    await FirebaseFirestore.instance
+        .collection('rewards')
+        .add(rewardData)
+        .then((value) {
+      isCompleted = true;
+      Get.snackbar('Reward Uploaded', 'Reward is uploaded successfully.',
+          colorText: Colors.white, backgroundColor: Colors.blue);
+    }).catchError((e) {
+      isCompleted = false;
+    });
+
+    return isCompleted;
+  }
+
   @override
   void onInit() {
     super.onInit();
     getMyDocument();
     getUsers();
     getEvents();
+    getBookmarkEvents();
+    getRewards();
+    getRedempRewards();
   }
 
   var isUsersLoading = false.obs;
@@ -143,6 +169,56 @@ class DataController extends GetxController {
       }).toList();
 
       isEventsLoading(false);
+    });
+  }
+
+  getBookmarkEvents() {
+    isEventsLoading(true);
+
+    FirebaseFirestore.instance.collection('events').snapshots().listen((event) {
+      allEvents.assignAll(event.docs);
+      filteredEvents.assignAll(event.docs);
+
+      savesEvents.value = allEvents.where((e) {
+        List savesIds = e.get('saves');
+
+        return savesIds.contains(FirebaseAuth.instance.currentUser!.uid);
+      }).toList();
+
+      isEventsLoading(false);
+    });
+  }
+
+  getRewards() {
+    isRewardsLoading(true);
+
+    FirebaseFirestore.instance
+        .collection('rewards')
+        .snapshots()
+        .listen((reward) {
+      allRewards.assignAll(reward.docs);
+
+      isRewardsLoading(false);
+    });
+  }
+
+  getRedempRewards() {
+    isRewardsLoading(true);
+
+    FirebaseFirestore.instance
+        .collection('rewards')
+        .snapshots()
+        .listen((reward) {
+      allRewards.assignAll(reward.docs);
+      filteredRewards.assignAll(reward.docs);
+
+      redempRewards.value = allRewards.where((e) {
+        List redeemIds = e.get('redeemed');
+
+        return redeemIds.contains(FirebaseAuth.instance.currentUser!.uid);
+      }).toList();
+
+      isRewardsLoading(false);
     });
   }
 }

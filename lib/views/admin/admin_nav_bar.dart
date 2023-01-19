@@ -1,26 +1,22 @@
-import 'package:catevent/utils/app_color.dart';
-import 'package:catevent/views/check_out/my_activity.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controller/data_controller.dart';
-import '../about.dart';
-import '../community/community.dart';
-import '../home/home_screen.dart';
-import '../profile/profile.dart';
-import 'create_event.dart';
-import 'message_screen.dart';
+import '../../utils/app_color.dart';
+import '../auth/logout.dart';
+import '../reward/create_reward.dart';
+import 'admin_view_reward.dart';
 
-class NavDrawer extends StatefulWidget {
-  const NavDrawer({super.key});
+class AdminNavBar extends StatefulWidget {
+  const AdminNavBar({super.key});
 
   @override
-  State<NavDrawer> createState() => _NavDrawerState();
+  State<AdminNavBar> createState() => _AdminNavBarState();
 }
 
-class _NavDrawerState extends State<NavDrawer> {
+class _AdminNavBarState extends State<AdminNavBar> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -59,13 +55,7 @@ class _NavDrawerState extends State<NavDrawer> {
     return Material(
         color: AppColors.maincolor,
         child: InkWell(
-          onTap: () {
-            Navigator.pop(context);
-
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => ProfileScreen(),
-            ));
-          },
+          onTap: () {},
           child: Container(
             padding: EdgeInsets.only(
               top: 25 + MediaQuery.of(context).padding.top,
@@ -97,97 +87,43 @@ class _NavDrawerState extends State<NavDrawer> {
     return Column(
       children: [
         ListTile(
-          leading: const Icon(Icons.home_outlined),
-          title: const Text('Discover Event'),
+          leading: const Icon(Icons.playlist_add_outlined),
+          title: const Text('Create Reward'),
           onTap: () {
             Navigator.pop(context);
 
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => HomeScreen(),
-              ),
-            );
-          },
-        ),
-        ListTile(
-          leading: const Icon(Icons.event_note_outlined),
-          title: const Text('My Activity'),
-          onTap: () {
-            Navigator.pop(context);
-
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => MyActivity(),
-              ),
-            );
-          },
-        ),
-        ListTile(
-          leading: const Icon(Icons.grid_view_outlined),
-          title: const Text('Create Event'),
-          onTap: () {
-            Navigator.pop(context);
-
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => CreateEventView(),
+                builder: (context) => CreateReward(),
               ),
             );
           },
         ),
         ListTile(
           leading: const Icon(Icons.card_giftcard_outlined),
-          title: const Text('Rewards'),
-          onTap: () {},
-        ),
-        ListTile(
-          leading: const Icon(Icons.volunteer_activism_outlined),
-          title: const Text('Community'),
+          title: const Text('View Reward'),
           onTap: () {
             Navigator.pop(context);
 
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => CommunityScreen(),
+                builder: (context) => AdminViewReward(),
               ),
             );
           },
-        ),
-        ListTile(
-          leading: const Icon(Icons.chat_outlined),
-          title: const Text('Chat'),
-          onTap: () {
-            Navigator.pop(context);
-
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => MessageScreen(),
-              ),
-            );
-          },
-        ),
-        ListTile(
-          leading: const Icon(Icons.favorite_border_outlined),
-          title: const Text('About cuzVcare'),
-          onTap: () {
-            Navigator.pop(context);
-
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const About(),
-              ),
-            );
-          },
-        ),
-        ListTile(
-          leading: const Icon(Icons.settings),
-          title: const Text('Settings'),
-          onTap: () {},
         ),
         ListTile(
           leading: const Icon(Icons.logout_outlined),
           title: const Text('Log out'),
-          onTap: () {},
+          onTap: () {
+            Navigator.pop(context);
+
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const LogoutView(),
+              ),
+            );
+          },
         ),
       ],
     );

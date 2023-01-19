@@ -1,14 +1,19 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../views/bottom_nav_bar/bottom_bar_view.dart';
+import '../views/admin/admin.dart';
+import '../views/home/home_screen.dart';
 import '../views/profile/add_profile.dart';
-import 'package:path/path.dart' as Path;
+import 'package:path/path.dart' as p;
+import 'package:http/http.dart' as http;
 
 class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -23,7 +28,13 @@ class AuthController extends GetxController {
         .then((value) {
       /// Login Success
       isLoading(false);
-      Get.to(() => BottomBarView());
+      if (email == "kohyungkwang@gmail.com" ||
+          FirebaseAuth.instance.currentUser!.uid ==
+              "7VS9cOQGxgVvtl4NHSXbhVqwjpN2") {
+        Get.to(() => AdminHomeScreen());
+      } else {
+        Get.to(() => HomeScreen());
+      }
     }).catchError((e) {
       isLoading(false);
       Get.snackbar('Error', "$e");
@@ -81,7 +92,7 @@ class AuthController extends GetxController {
       isLoading(false);
 
       ///SuccessFull loged in
-      Get.to(() => BottomBarView());
+      Get.to(() => HomeScreen());
     }).catchError((e) {
       /// Error in getting Login
       isLoading(false);
@@ -93,7 +104,7 @@ class AuthController extends GetxController {
 
   Future<String> uploadImageToFirebaseStorage(File image) async {
     String imageUrl = '';
-    String fileName = Path.basename(image.path);
+    String fileName = p.basename(image.path);
 
     var reference =
         FirebaseStorage.instance.ref().child('profileImages/$fileName');
@@ -120,7 +131,39 @@ class AuthController extends GetxController {
       'gender': gender
     }).then((value) {
       isProfileInformationLoading(false);
-      Get.offAll(() => BottomBarView());
+      Get.offAll(() => HomeScreen());
     });
+  }
+
+  signInWithFacebook() async {
+    isLoading(true);
+    try {
+      final LoginResult result = await FacebookAuth.instance
+          .login(permissions: (['email', 'public_profile']));
+      final token = result.accessToken!.token;
+      print(
+          'Facebook token userID : ${result.accessToken!.grantedPermissions}');
+      final graphResponse = await http.get(Uri.parse(
+          'https://graph.facebook.com/'
+          'v2.12/me?fields=name,first_name,last_name,email&access_token=${token}'));
+
+      final profile = jsonDecode(graphResponse.body);
+      print("Profile is equal to $profile");
+      try {
+        final AuthCredential facebookCredential =
+            FacebookAuthProvider.credential(result.accessToken!.token);
+        final userCredential = await FirebaseAuth.instance
+            .signInWithCredential(facebookCredential);
+
+        Get.to(() => HomeScreen());
+      } catch (e) {
+        isLoading(false);
+        print("Error is $e");
+      }
+    } catch (e) {
+      isLoading(false);
+      print("error occurred");
+      print(e.toString());
+    }
   }
 }

@@ -1,3 +1,4 @@
+import 'package:catevent/views/my_activity/my_activity.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,7 @@ class _CheckOutViewState extends State<CheckOutView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Container(
@@ -118,17 +119,17 @@ class _CheckOutViewState extends State<CheckOutView> {
                               ],
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           myText(
                             text: widget.eventDoc!.get('date'),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w300,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Row(
@@ -141,26 +142,26 @@ class _CheckOutViewState extends State<CheckOutView> {
                                   fit: BoxFit.fill,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               myText(
                                 text: widget.eventDoc!.get('location'),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w300,
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           myText(
                             text: widget.eventDoc!.get('start_time') +
                                 ' - ' +
                                 widget.eventDoc!.get('end_time'),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w300,
                             ),
@@ -178,7 +179,7 @@ class _CheckOutViewState extends State<CheckOutView> {
                 children: [
                   myText(
                     text: 'Points Given: ',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
                     ),
@@ -186,7 +187,7 @@ class _CheckOutViewState extends State<CheckOutView> {
                   Spacer(),
                   myText(
                     text: '\$${widget.eventDoc!.get('point')}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                     ),
@@ -198,7 +199,7 @@ class _CheckOutViewState extends State<CheckOutView> {
                 children: [
                   myText(
                     text: 'Total Ticket',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
                     ),
@@ -214,7 +215,7 @@ class _CheckOutViewState extends State<CheckOutView> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
@@ -245,6 +246,7 @@ class _CheckOutViewState extends State<CheckOutView> {
                         });
                       },
                     );
+                    Get.to(const MyActivity());
                   },
                   text: 'Join Now',
                 ),

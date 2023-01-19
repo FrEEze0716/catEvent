@@ -1,8 +1,8 @@
-import 'package:catevent/views/check_out/my_activity_past.dart';
-import 'package:catevent/views/check_out/my_activity_upcoming.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/app_color.dart';
+import 'my_activity_bookmark.dart';
+import 'my_activity_joined.dart';
 
 class MyActivity extends StatelessWidget {
   const MyActivity({super.key});
@@ -10,12 +10,12 @@ class MyActivity extends StatelessWidget {
   TabBar get _tabBar => const TabBar(
         indicatorWeight: 5,
         indicatorSize: TabBarIndicatorSize.tab,
-        indicatorColor: Color.fromRGBO(252, 192, 211, 1),
-        labelColor: Color.fromRGBO(252, 192, 211, 1),
+        indicatorColor: Colors.blueGrey,
+        labelColor: Colors.blueGrey,
         unselectedLabelColor: Colors.black,
         tabs: [
-          Tab(text: 'Upcoming'),
-          Tab(text: 'Past'),
+          Tab(text: 'Joined'),
+          Tab(text: 'Bookmark'),
         ],
       );
 
@@ -36,10 +36,10 @@ class MyActivity extends StatelessWidget {
             ),
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
-            MyActivityUpcoming(),
-            MyActivityPast(),
+            MyActivityJoined(),
+            MyActivityBookmark(),
           ],
         ),
       ),

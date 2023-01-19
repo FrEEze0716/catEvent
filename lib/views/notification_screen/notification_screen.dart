@@ -80,7 +80,7 @@ class _UserNotificationScreenState extends State<UserNotificationScreen> {
                         .collection('myNotifications')
                         .snapshots(),
                   )),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
             ],
@@ -102,7 +102,7 @@ class _UserNotificationScreenState extends State<UserNotificationScreen> {
                 radius: 25,
                 backgroundImage: NetworkImage(image),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               Expanded(

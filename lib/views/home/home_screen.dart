@@ -1,5 +1,3 @@
-import 'package:catevent/utils/app_color.dart';
-import 'package:catevent/views/bottom_nav_bar/nav_drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +9,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../controller/data_controller.dart';
 import '../../services/notification_service.dart';
+import '../../utils/app_color.dart';
 import '../../widgets/events_feed_widget.dart';
+import '../nav_bar/nav_drawer.dart';
 import '../notification_screen/notification_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -153,10 +153,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: AppColors.blue,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 15,
                             ),
-                            Text(
+                            const Text(
                               'You\'re all caught up!',
                               style: TextStyle(
                                 fontSize: 18,

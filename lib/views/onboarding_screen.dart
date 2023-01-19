@@ -80,23 +80,6 @@ class OnBoardingScreen extends StatelessWidget {
                   ),
                 ),
               )
-
-              /*
-              // Expanded Take all the remaining space
-              Expanded(
-                child: Container(
-                  width: double.infinity,
-                  height: 100,
-                  decoration: const BoxDecoration(
-                    color: Colors.pinkAccent,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(16),
-                      topRight: Radius.circular(16),
-                    ),
-                  ),
-                ),
-              )
-              */
             ],
           ),
         ),

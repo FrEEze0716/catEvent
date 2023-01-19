@@ -51,6 +51,8 @@ dependencies:
   emoji_picker_flutter: 
   firebase_messaging: 
   flutter_local_notifications:
+  flutter_login_facebook: ^1.7.0
+  flutter_facebook_auth:
   timeago:
   intl:
   http:

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controller/data_controller.dart';
-import '../chat/chat_room_screen.dart';
+import 'chat_room_screen.dart';
 
 class MessageScreen extends StatefulWidget {
   @override
@@ -41,7 +41,7 @@ class _MessageScreenState extends State<MessageScreen> {
                       width: screenwidth * 0.9,
                       //decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
                       child: TextFormField(
-                        style: TextStyle(color: Colors.grey),
+                        style: const TextStyle(color: Colors.grey),
                         onChanged: (String input) {
                           if (input.isEmpty) {
                             dataController.filteredUsers
@@ -69,7 +69,7 @@ class _MessageScreenState extends State<MessageScreen> {
                         },
                         decoration: InputDecoration(
                           errorBorder: InputBorder.none,
-                          errorStyle: TextStyle(fontSize: 0, height: 0),
+                          errorStyle: const TextStyle(fontSize: 0, height: 0),
                           focusedErrorBorder: InputBorder.none,
                           fillColor: Colors.deepOrangeAccent[2],
                           filled: true,
@@ -84,8 +84,8 @@ class _MessageScreenState extends State<MessageScreen> {
                               borderRadius: BorderRadius.circular(10)),
                           hintText: "Search",
                           prefixIcon: Icon(Icons.search),
-                          hintStyle:
-                              TextStyle(color: Colors.black, fontSize: 17),
+                          hintStyle: const TextStyle(
+                              color: Colors.black, fontSize: 17),
                         ),
                       ),
                     ),
@@ -181,7 +181,7 @@ class _MessageScreenState extends State<MessageScreen> {
                                               ),
                                               Text(
                                                 name,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     fontSize: 15,
                                                     fontWeight:
                                                         FontWeight.bold),

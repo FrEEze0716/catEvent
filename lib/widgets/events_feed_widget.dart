@@ -28,8 +28,7 @@ Widget EventsFeed() {
         ));
 }
 
-Widget buildCard(
-    {String? image, text, Function? func, DocumentSnapshot? eventData}) {
+Widget buildCard({String? image, text, Function? func, DocumentSnapshot? eventData}) {
   DataController dataController = Get.find<DataController>();
 
   List joinedUsers = [];

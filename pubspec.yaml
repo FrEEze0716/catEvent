@@ -54,6 +54,9 @@ dependencies:
   timeago:
   intl:
   http:
+  geolocator: ^9.0.2
+  font_awesome_flutter: ^10.3.0
+  geocoding: ^2.0.5
 
 dev_dependencies:
   flutter_test:

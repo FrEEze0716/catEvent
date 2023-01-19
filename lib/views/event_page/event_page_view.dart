@@ -66,7 +66,6 @@ class _EventPageViewState extends State<EventPageView> {
                 }
 
                 List joinedUsers = [];
-
                 try {
                   joinedUsers = eventData.get('joined');
                 } catch (e) {
@@ -353,7 +352,7 @@ class _EventPageViewState extends State<EventPageView> {
                                   color: Colors.blue.withOpacity(0.9)),
                               child: Center(
                                 child: Text(
-                                  "invite Friends",
+                                  "Invite Friends",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w500,

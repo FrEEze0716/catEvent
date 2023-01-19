@@ -1,9 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 import '../../controller/data_controller.dart';
 import '../../utils/app_color.dart';
+import '../../views/event_page/event_page_view.dart';
+import '../../widgets/events_feed_widget.dart';
 import '../../widgets/my_widgets.dart';
 
 class CommunityScreen extends StatefulWidget {
@@ -19,11 +24,63 @@ class _CommunityScreenState extends State<CommunityScreen> {
   @override
   Widget build(BuildContext context) {
     var screenheight = MediaQuery.of(context).size.height;
+    List placemarks = [];
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Community'),
-        backgroundColor: AppColors.maincolor,
-      ),
+          title: const Text('Community'),
+          backgroundColor: AppColors.maincolor,
+          actions: <Widget>[
+            Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(32.0),
+                ),
+                // GPS Function:
+                onTap: () async {
+                  bool servicestatus =
+                      await Geolocator.isLocationServiceEnabled();
+                  if (servicestatus) {
+                    print("GPS service is enabled");
+                    // https://www.fluttercampus.com/guide/212/get-gps-location/#how-to-check-location-permission-or-request-location-permission
+                    LocationPermission permission =
+                        await Geolocator.checkPermission();
+                    if (permission == LocationPermission.denied) {
+                      permission = await Geolocator.requestPermission();
+                      if (permission == LocationPermission.denied) {
+                        print('Location permissions are denied');
+                      } else if (permission ==
+                          LocationPermission.deniedForever) {
+                        print("Location permissions are permanently denied");
+                      } else {
+                        print("GPS Location service is granted");
+                      }
+                    } else {
+                      print("GPS Location permission granted.");
+                      Position position = await Geolocator.getCurrentPosition(
+                              desiredAccuracy: LocationAccuracy.best)
+                          .timeout(Duration(seconds: 5));
+
+                      try {
+                        List<Placemark> placemarks =
+                            await placemarkFromCoordinates(
+                          position.latitude,
+                          position.longitude,
+                        );
+                        print(placemarks[0]);
+                      } catch (err) {}
+                    }
+                  } else {
+                    print("GPS service is disabled.");
+                  }
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(FontAwesomeIcons.locationDot),
+                ),
+              ),
+            ),
+          ]),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
@@ -71,8 +128,13 @@ class _CommunityScreenState extends State<CommunityScreen> {
                                 .toLowerCase()
                                 .contains(
                                     searchController.text.toLowerCase()) ||
-                            isTagContain ||
-                            element
+                                element
+                                .get('location')
+                                .toString()
+                                .toLowerCase()
+                                .contains(placemarks[0].text.toLowerCase()) ||
+                                isTagContain ||
+                                element
                                 .get('event_name')
                                 .toString()
                                 .toLowerCase()
@@ -81,6 +143,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                       dataController.filteredEvents.assignAll(data);
                     }
                   },
+                  // UI: Search Box
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     prefixIcon: Container(
@@ -183,7 +246,9 @@ class _CommunityScreenState extends State<CommunityScreen> {
                       }
 
                       return InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          EventsFeed();
+                        },
                         child: Container(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,

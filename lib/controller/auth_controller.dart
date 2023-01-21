@@ -27,9 +27,9 @@ class AuthController extends GetxController {
         .then((value) {
       /// Login Success
       isLoading(false);
-      if (email == "kohyungkwang@gmail.com" ||
+      if (email == "debuggers304@gmail.com" ||
           FirebaseAuth.instance.currentUser!.uid ==
-              "7VS9cOQGxgVvtl4NHSXbhVqwjpN2") {
+              "kH8ByQd72fh7hVBkMxo4wUC31MI2") {
         Get.to(() => AdminHomeScreen());
       } else {
         Get.to(() => HomeScreen());

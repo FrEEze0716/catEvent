@@ -1,7 +1,7 @@
-import 'package:catevent/widgets/rewards_feed_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/app_color.dart';
+import '../../widgets/rewards_feed_widget.dart';
 
 class AdminViewReward extends StatefulWidget {
   const AdminViewReward({super.key});

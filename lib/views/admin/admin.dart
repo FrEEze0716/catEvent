@@ -1,4 +1,3 @@
-import 'package:catevent/views/admin/admin_nav_bar.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,6 +8,7 @@ import '../../services/notification_service.dart';
 import '../../utils/app_color.dart';
 import '../../widgets/events_feed_widget.dart';
 import '../notification_screen/notification_screen.dart';
+import 'admin_nav_bar.dart';
 
 class AdminHomeScreen extends StatefulWidget {
   @override

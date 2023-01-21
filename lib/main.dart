@@ -42,7 +42,6 @@ class MyApp extends StatelessWidget {
         ),
       ),
       title: 'cuzvcare',
-      //home: OnBoardingScreen(),
       home: FirebaseAuth.instance.currentUser == null
           ? OnBoardingScreen()
           : HomeScreen(),

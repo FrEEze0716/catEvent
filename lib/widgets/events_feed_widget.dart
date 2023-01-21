@@ -8,6 +8,7 @@ import '../controller/data_controller.dart';
 import '../utils/app_color.dart';
 import '../views/event_page/event_page_view.dart';
 import '../views/profile/profile.dart';
+import 'my_widgets.dart';
 
 Widget EventsFeed() {
   DataController dataController = Get.find<DataController>();
@@ -22,13 +23,14 @@ Widget EventsFeed() {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (ctx, i) {
-            return EventItem(dataController.allEvents[i]);
+            return EventItem(dataController.filteredEvents[i]);
           },
-          itemCount: dataController.allEvents.length,
+          itemCount: dataController.filteredEvents.length,
         ));
 }
 
-Widget buildCard({String? image, text, Function? func, DocumentSnapshot? eventData}) {
+Widget buildCard(
+    {String? image, text, Function? func, DocumentSnapshot? eventData}) {
   DataController dataController = Get.find<DataController>();
 
   List joinedUsers = [];
@@ -67,6 +69,26 @@ Widget buildCard({String? image, text, Function? func, DocumentSnapshot? eventDa
     eventSavedByUsers = eventData!.get('saves');
   } catch (e) {
     eventSavedByUsers = [];
+  }
+
+  List tags = [];
+  try {
+    tags = eventData!.get('tags');
+  } catch (e) {
+    tags = [];
+  }
+
+  String tagsCollectively = '';
+
+  tags.forEach((e) {
+    tagsCollectively += '#$e ';
+  });
+
+  String location = '';
+  try {
+    location = eventData!.get('location');
+  } catch (e) {
+    location = '';
   }
 
   return Container(
@@ -174,6 +196,27 @@ Widget buildCard({String? image, text, Function? func, DocumentSnapshot? eventDa
         ),
         Row(
           children: [
+            const SizedBox(
+              width: 10,
+            ),
+            Image.asset('assets/location.png'),
+            const SizedBox(
+              width: 10,
+            ),
+            Expanded(
+              child: myText(
+                text: location,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xff303030),
+                ),
+              ),
+            ),
+          ],
+        ),
+        Row(
+          children: [
             Container(
                 width: Get.width * 0.6,
                 height: 50,
@@ -201,6 +244,25 @@ Widget buildCard({String? image, text, Function? func, DocumentSnapshot? eventDa
                   itemCount: joinedUsers.length,
                   scrollDirection: Axis.horizontal,
                 )),
+          ],
+        ),
+        Row(
+          children: [
+            const SizedBox(
+              width: 10,
+            ),
+            Expanded(
+              child: Text(
+                tagsCollectively,
+                maxLines: 2,
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.blue,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ),
           ],
         ),
         SizedBox(

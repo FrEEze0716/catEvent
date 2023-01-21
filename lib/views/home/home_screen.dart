@@ -34,7 +34,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController searchController = TextEditingController();
     DataController dataController = Get.find<DataController>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('cuzVcare - Home'),
@@ -69,6 +71,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     Position position = await Geolocator.getCurrentPosition(
                             desiredAccuracy: LocationAccuracy.best)
                         .timeout(Duration(seconds: 5));
+                    print(position.latitude);
+                    print(position.longitude);
 
                     try {
                       List<Placemark> placemarks =
@@ -77,15 +81,59 @@ class _HomeScreenState extends State<HomeScreen> {
                         position.longitude,
                       );
                       print(placemarks[0]);
+                      Placemark placemark = placemarks[0];
+                      String? subAdministrativeArea =
+                          placemark.subAdministrativeArea;
+                      String? country = placemark.country;
+                      String? administrativeArea = placemark.administrativeArea;
+                      print(subAdministrativeArea);
+                      print(country);
+                      print(administrativeArea);
 
-                      final CollectionReference locationCollection =
-                          FirebaseFirestore.instance.collection('events');
-                      final Query location = locationCollection.where("location",
-                          isEqualTo: placemarks[0]);
+                      if (subAdministrativeArea == "" &&
+                          country == "" &&
+                          administrativeArea == "") {
+                        dataController.filteredEvents
+                            .assignAll(dataController.allEvents);
+                      } else {
+                        List<DocumentSnapshot> data =
+                            dataController.allEvents.value.where((element) {
+                          List tags = [];
 
-                        // Stream<List<Notice>>get notices{
-                        //   return unapproved.snapshots().map(_noticeListFromSnapshot);
-                        // }
+                          bool isTagContain = false;
+
+                          try {
+                            tags = element.get('tags');
+                            for (int i = 0; i < tags.length; i++) {
+                              tags[i] = tags[i].toString().toLowerCase();
+                              if (tags[i].toString().contains(
+                                  searchController.text.toLowerCase())) {
+                                isTagContain = true;
+                              }
+                            }
+                          } catch (e) {
+                            tags = [];
+                          }
+
+                          return (element
+                                  .get('location')
+                                  .toString()
+                                  .toLowerCase()
+                                  .contains(
+                                      subAdministrativeArea!.toLowerCase()) ||
+                              element
+                                  .get('location')
+                                  .toString()
+                                  .toLowerCase()
+                                  .contains(country!.toLowerCase()) ||
+                              element
+                                  .get('location')
+                                  .toString()
+                                  .toLowerCase()
+                                  .contains(administrativeArea!.toLowerCase()));
+                        }).toList();
+                        dataController.filteredEvents.assignAll(data);
+                      }
                     } catch (err) {}
                     // Position position =
                     //     await Geolocator.getCurrentPosition(
@@ -132,6 +180,104 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 SizedBox(
+                  height: Get.height * 0.02,
+                ),
+                Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  // Search Box Function
+                  child: TextFormField(
+                    controller: searchController,
+                    onChanged: (String input) {
+                      if (input.isEmpty) {
+                        dataController.filteredEvents
+                            .assignAll(dataController.allEvents);
+                      } else {
+                        List<DocumentSnapshot> data =
+                            dataController.allEvents.value.where((element) {
+                          List tags = [];
+
+                          bool isTagContain = false;
+
+                          try {
+                            tags = element.get('tags');
+                            for (int i = 0; i < tags.length; i++) {
+                              tags[i] = tags[i].toString().toLowerCase();
+                              if (tags[i].toString().contains(
+                                  searchController.text.toLowerCase())) {
+                                isTagContain = true;
+                              }
+                            }
+                          } catch (e) {
+                            tags = [];
+                          }
+
+                          return (element
+                                  .get('location')
+                                  .toString()
+                                  .toLowerCase()
+                                  .contains(
+                                      searchController.text.toLowerCase()) ||
+                              // element
+                              //     .get('location')
+                              //     .toString()
+                              //     .toLowerCase()
+                              //     .contains(
+                              //         subAdministrativeArea!.toLowerCase()) ||
+                              // element
+                              //     .get('location')
+                              //     .toString()
+                              //     .toLowerCase()
+                              //     .contains(country!.toLowerCase()) ||
+                              // element
+                              //     .get('location')
+                              //     .toString()
+                              //     .toLowerCase()
+                              //     .contains(administrativeArea!.toLowerCase()) ||
+                              isTagContain ||
+                              element
+                                  .get('event_name')
+                                  .toString()
+                                  .toLowerCase()
+                                  .contains(
+                                      searchController.text.toLowerCase()));
+                        }).toList();
+                        dataController.filteredEvents.assignAll(data);
+                      }
+                    },
+                    // UI: Search Box
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      prefixIcon: Container(
+                        width: 15,
+                        height: 15,
+                        padding: const EdgeInsets.all(15),
+                        child: Image.asset(
+                          'assets/search.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      hintText: "Search",
+                      hintStyle: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          dataController.filteredEvents
+                              .assignAll(dataController.allEvents);
+                          FocusScope.of(context).requestFocus(FocusNode());
+                        },
+                        icon: Icon(Icons.clear),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  // height: 10,
                   height: Get.height * 0.02,
                 ),
                 EventsFeed(),

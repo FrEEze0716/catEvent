@@ -476,7 +476,7 @@ class _ChatState extends State<Chat> {
             Padding(
               padding: const EdgeInsets.only(top: 5, right: 20),
               child: Text(
-                "Yesterday",
+                "Just Now",
                 style: TextStyle(
                   color: AppColors.grey,
                   fontWeight: FontWeight.w500,

@@ -8,12 +8,10 @@ import '../../utils/app_color.dart';
 import '../about.dart';
 import '../auth/logout.dart';
 import '../my_activity/my_activity.dart';
-import '../community/community.dart';
 import '../home/home_screen.dart';
 import '../profile/profile.dart';
 import '../event_page/create_event.dart';
 import '../chat/message_screen.dart';
-import '../reward/create_reward.dart';
 import '../reward/reward.dart';
 
 class NavDrawer extends StatefulWidget {
@@ -152,19 +150,6 @@ class _NavDrawerState extends State<NavDrawer> {
           },
         ),
         ListTile(
-          leading: const Icon(Icons.volunteer_activism_outlined),
-          title: const Text('Community'),
-          onTap: () {
-            Navigator.pop(context);
-
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => CommunityScreen(),
-              ),
-            );
-          },
-        ),
-        ListTile(
           leading: const Icon(Icons.chat_outlined),
           title: const Text('Chat'),
           onTap: () {
@@ -189,11 +174,6 @@ class _NavDrawerState extends State<NavDrawer> {
               ),
             );
           },
-        ),
-        ListTile(
-          leading: const Icon(Icons.settings),
-          title: const Text('Settings'),
-          onTap: () {},
         ),
         ListTile(
           leading: const Icon(Icons.logout_outlined),

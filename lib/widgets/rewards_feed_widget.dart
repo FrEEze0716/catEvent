@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 
 import '../controller/data_controller.dart';
 import '../utils/app_color.dart';
-import '../views/reward/reward.dart';
 import 'my_widgets.dart';
 
 Widget RewardsFeed() {
@@ -32,7 +31,7 @@ Widget buildCard({String? image, text, DocumentSnapshot? rewardData}) {
 
   String enddate = rewardData.get('end_date');
 
-  String point = rewardData.get('point');
+  int point = rewardData.get('point');
 
   List redeemed = [];
 
@@ -250,7 +249,7 @@ ViewRewardRedeemed() {
                         String name =
                             dataController.redempRewards[i].get('reward_name');
 
-                        String point =
+                        int point =
                             dataController.redempRewards[i].get('point');
 
                         return Column(

@@ -101,7 +101,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     authController = Get.find<AuthController>();
   }
@@ -230,7 +229,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         'assets/calender.png',
                         cacheHeight: 20,
                       ),
-                      hintText: 'Date Of Birht',
+                      hintText: 'Date Of Birth',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
@@ -332,7 +331,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     width: Get.width * 0.8,
                     child: RichText(
                       textAlign: TextAlign.center,
-                      text: TextSpan(children: [
+                      text: const TextSpan(children: [
                         TextSpan(
                             text: 'By signing up, you agree our ',
                             style: TextStyle(

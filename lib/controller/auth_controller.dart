@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -92,7 +91,7 @@ class AuthController extends GetxController {
       isLoading(false);
 
       ///SuccessFull loged in
-      Get.to(() => HomeScreen());
+      Get.to(() => ProfileScreen());
     }).catchError((e) {
       /// Error in getting Login
       isLoading(false);
@@ -128,7 +127,10 @@ class AuthController extends GetxController {
       'first': firstName,
       'last': lastName,
       'dob': dob,
-      'gender': gender
+      'gender': gender,
+      'location': '',
+      'desc': '',
+      'point': 0,
     }).then((value) {
       isProfileInformationLoading(false);
       Get.offAll(() => HomeScreen());
@@ -155,7 +157,7 @@ class AuthController extends GetxController {
         final userCredential = await FirebaseAuth.instance
             .signInWithCredential(facebookCredential);
 
-        Get.to(() => HomeScreen());
+        Get.to(() => ProfileScreen());
       } catch (e) {
         isLoading(false);
         print("Error is $e");

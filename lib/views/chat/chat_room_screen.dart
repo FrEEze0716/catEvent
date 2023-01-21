@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:timeago/timeago.dart' as timeAgo;
 
 import '../../controller/data_controller.dart';
 import '../../services/notification_service.dart';
@@ -190,6 +190,7 @@ class _ChatState extends State<Chat> {
                           .collection('chats')
                           .doc(widget.groupId)
                           .collection('chatroom')
+                          .orderBy('timeStamp', descending: false)
                           .snapshots(),
                     ))),
           Container(
@@ -364,6 +365,12 @@ class _ChatState extends State<Chat> {
     } catch (e) {
       message = '';
     }
+    DateTime timeStamp;
+    try {
+      timeStamp = doc.get('timeStamp').toDate();
+    } catch (e) {
+      timeStamp = DateTime.now();
+    }
     return Container(
       margin: EdgeInsets.only(top: 10),
       child: Dismissible(
@@ -423,7 +430,7 @@ class _ChatState extends State<Chat> {
                 Padding(
                   padding: const EdgeInsets.only(left: 70, top: 5),
                   child: Text(
-                    "2 days ago",
+                    timeAgo.format(timeStamp),
                     style: TextStyle(
                       color: AppColors.grey,
                       fontWeight: FontWeight.w500,
@@ -442,6 +449,12 @@ class _ChatState extends State<Chat> {
 
   textMessageISent(DocumentSnapshot doc) {
     String message = doc.get('message');
+    DateTime timeStamp;
+    try {
+      timeStamp = doc.get('timeStamp').toDate();
+    } catch (e) {
+      timeStamp = DateTime.now();
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -476,7 +489,7 @@ class _ChatState extends State<Chat> {
             Padding(
               padding: const EdgeInsets.only(top: 5, right: 20),
               child: Text(
-                "Just Now",
+                timeAgo.format(timeStamp),
                 style: TextStyle(
                   color: AppColors.grey,
                   fontWeight: FontWeight.w500,

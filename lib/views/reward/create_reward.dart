@@ -462,7 +462,7 @@ class _CreateRewardState extends State<CreateReward> {
                                 'numRedeem': int.parse(numRedeem.text),
                                 'description': descriptionController.text,
                                 'redeemed': [],
-                                'point': pointController.text,
+                                'point': int.parse(pointController.text),
                                 'media': mediaUrls,
                                 'uid': FirebaseAuth.instance.currentUser!.uid,
                               };

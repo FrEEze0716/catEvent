@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../controller/auth_controller.dart';
 import '../../utils/app_color.dart';
 import '../../widgets/my_widgets.dart';
-import '../profile/profile.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -164,7 +163,7 @@ class _LoginViewState extends State<LoginView> {
               myTextField(
                   bool: false,
                   icon: 'assets/mail.png',
-                  text: 'sarasmith12@gmail.com',
+                  text: 'username@gmail.com',
                   validator: (String input) {
                     if (input.isEmpty) {
                       Get.snackbar('Warning', 'Email is required.',

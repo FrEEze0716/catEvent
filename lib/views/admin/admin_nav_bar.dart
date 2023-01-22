@@ -53,7 +53,7 @@ class _AdminNavBarState extends State<AdminNavBar> {
       userName = '';
     }
     return Material(
-        color: AppColors.maincolor,
+        color: AppColors.admincolor,
         child: InkWell(
           onTap: () {},
           child: Container(

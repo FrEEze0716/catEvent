@@ -16,7 +16,7 @@ class _AdminViewRewardState extends State<AdminViewReward> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('View Reward'),
-        backgroundColor: AppColors.maincolor,
+        backgroundColor: AppColors.admincolor,
       ),
       body: RewardsFeed(),
     );

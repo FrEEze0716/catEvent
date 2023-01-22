@@ -34,7 +34,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('cuzVcare - Admin Home Page'),
-        backgroundColor: AppColors.maincolor,
+        backgroundColor: AppColors.admincolor,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.notifications_none_outlined),

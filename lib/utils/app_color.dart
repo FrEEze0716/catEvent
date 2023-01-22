@@ -13,4 +13,5 @@ class AppColors {
   static Color grey = Color(0xff918F8F);
   static Color greychat = Color(0xffE8E8E8);
   static Color maincolor = Color.fromRGBO(244, 147, 193, 1);
+  static Color admincolor = Color.fromARGB(255, 244, 174, 147);
 }

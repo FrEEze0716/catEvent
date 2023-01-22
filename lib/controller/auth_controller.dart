@@ -90,8 +90,12 @@ class AuthController extends GetxController {
     FirebaseAuth.instance.signInWithCredential(credential).then((value) {
       isLoading(false);
 
-      ///SuccessFull loged in
-      Get.to(() => HomeScreen());
+      if (FirebaseAuth.instance.currentUser!.uid ==
+          "kH8ByQd72fh7hVBkMxo4wUC31MI2") {
+        Get.to(() => AdminHomeScreen());
+      } else {
+        Get.to(() => HomeScreen());
+      }
     }).catchError((e) {
       /// Error in getting Login
       isLoading(false);

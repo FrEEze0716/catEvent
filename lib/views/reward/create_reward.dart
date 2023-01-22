@@ -96,7 +96,7 @@ class _CreateRewardState extends State<CreateReward> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create Reward'),
-        backgroundColor: AppColors.maincolor,
+        backgroundColor: AppColors.admincolor,
       ),
       body: SingleChildScrollView(
         child: Container(

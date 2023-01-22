@@ -31,6 +31,8 @@ Widget buildCard({String? image, text, DocumentSnapshot? rewardData}) {
 
   String enddate = rewardData.get('end_date');
 
+  String tnc = rewardData.get('description');
+
   int point = rewardData.get('point');
 
   List redeemed = [];
@@ -43,7 +45,7 @@ Widget buildCard({String? image, text, DocumentSnapshot? rewardData}) {
           children: [
             Container(
               width: 150,
-              height: 100,
+              height: 120,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
@@ -103,43 +105,66 @@ Widget buildCard({String? image, text, DocumentSnapshot? rewardData}) {
                       ),
                     ),
                   ),
-                  elevatedButton(
-                    text: 'Redeem',
-                    onpress: () {
-                      if (!redeemed
-                          .contains(FirebaseAuth.instance.currentUser!.uid)) {
-                        FirebaseFirestore.instance
-                            .collection('rewards')
-                            .doc(rewardData.id)
-                            .set({
-                          'redeemed': FieldValue.arrayUnion(
-                              [FirebaseAuth.instance.currentUser!.uid]),
-                          'numRedeem': FieldValue.increment(-1),
-                        }, SetOptions(merge: true)).then(
-                          (value) {
+                  Row(
+                    children: [
+                      elevatedButton(
+                        text: 'Redeem',
+                        onpress: () {
+                          if (!redeemed.contains(
+                              FirebaseAuth.instance.currentUser!.uid)) {
                             FirebaseFirestore.instance
-                                .collection('redemption')
+                                .collection('rewards')
                                 .doc(rewardData.id)
                                 .set({
-                              'redemption': FieldValue.arrayUnion([
-                                {
-                                  'uid': FirebaseAuth.instance.currentUser!.uid,
-                                  'tickets': 1
-                                }
-                              ])
-                            });
-                          },
+                              'redeemed': FieldValue.arrayUnion(
+                                  [FirebaseAuth.instance.currentUser!.uid]),
+                              'numRedeem': FieldValue.increment(-1),
+                            }, SetOptions(merge: true)).then(
+                              (value) {
+                                FirebaseFirestore.instance
+                                    .collection('redemption')
+                                    .doc(rewardData.id)
+                                    .set({
+                                  'redemption': FieldValue.arrayUnion([
+                                    {
+                                      'uid': FirebaseAuth
+                                          .instance.currentUser!.uid,
+                                      'tickets': 1
+                                    }
+                                  ])
+                                });
+                              },
+                            );
+                            Get.snackbar('Reward is redeemed successfully',
+                                "View your redeemed rewards in the Redeemed tab.",
+                                colorText: Colors.white,
+                                backgroundColor: Colors.blue);
+                          } else {
+                            Get.snackbar('Sorry', "The reward was redeemed.",
+                                colorText: Colors.white,
+                                backgroundColor: Colors.blue);
+                          }
+                        },
+                      ),
+                      Builder(builder: (context) {
+                        return TextButton(
+                          onPressed: () => showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: const Text('Terms and Conditions'),
+                              content: Text(tnc),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'OK'),
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
+                          ),
+                          child: const Text('T&C'),
                         );
-                        Get.snackbar('Reward is redeemed successfully',
-                            "View your redeemed rewards in the Redeemed tab.",
-                            colorText: Colors.white,
-                            backgroundColor: Colors.blue);
-                      } else {
-                        Get.snackbar('Sorry', "The reward was redeemed.",
-                            colorText: Colors.white,
-                            backgroundColor: Colors.blue);
-                      }
-                    },
+                      }),
+                    ],
                   ),
                 ],
               ),

@@ -399,9 +399,7 @@ EventItem(DocumentSnapshot event) {
       Row(
         children: [
           InkWell(
-            onTap: () {
-              Get.to(() => ProfileScreen());
-            },
+            onTap: () {},
             child: CircleAvatar(
               radius: 25,
               backgroundColor: Colors.blue,

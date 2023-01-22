@@ -91,7 +91,7 @@ class AuthController extends GetxController {
       isLoading(false);
 
       ///SuccessFull loged in
-      Get.to(() => ProfileScreen());
+      Get.to(() => HomeScreen());
     }).catchError((e) {
       /// Error in getting Login
       isLoading(false);
@@ -157,7 +157,7 @@ class AuthController extends GetxController {
         final userCredential = await FirebaseAuth.instance
             .signInWithCredential(facebookCredential);
 
-        Get.to(() => ProfileScreen());
+        Get.to(() => HomeScreen());
       } catch (e) {
         isLoading(false);
         print("Error is $e");

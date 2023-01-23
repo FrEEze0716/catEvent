@@ -206,7 +206,7 @@ class _CheckOutViewState extends State<CheckOutView> {
                   ),
                   Spacer(),
                   myText(
-                    text: '\$${int.parse(widget.eventDoc!.get('point')) + 2}',
+                    text: '1',
                     style: TextStyle(
                       fontSize: 16,
                       color: AppColors.blue,

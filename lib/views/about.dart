@@ -84,7 +84,7 @@ class About extends StatelessWidget {
             const Text(
               "Developed by: ",
               textAlign: TextAlign.left,
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             Padding(
               padding: const EdgeInsets.all(20),
@@ -97,56 +97,36 @@ class About extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.white,
-                        backgroundImage: AssetImage(
-                          'assets/profile.png',
-                        ),
-                      ),
                       Text("Chong"),
                       Text("Yi Yin"),
+                      Text("--------"),
+                      Text("152684"),
                     ],
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.white,
-                        backgroundImage: AssetImage(
-                          'assets/profile.png',
-                        ),
-                      ),
                       Text("Chuah"),
                       Text("Tiong Guan"),
+                      Text("--------"),
+                      Text("152686"),
                     ],
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.white,
-                        backgroundImage: AssetImage(
-                          'assets/profile.png',
-                        ),
-                      ),
                       Text("Derek Gan"),
                       Text("Kaa Kheng"),
+                      Text("--------"),
+                      Text("154738"),
                     ],
                   ),
                   Column(
                     children: const [
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.white,
-                        backgroundImage: AssetImage(
-                          'assets/profile.png',
-                        ),
-                      ),
                       Text("Koh"),
                       Text("Yung Kwang"),
+                      Text("--------"),
+                      Text("153396"),
                     ],
                   ),
                 ],

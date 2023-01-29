@@ -58,7 +58,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
 
     try {
-      point = dataController!.myDocument!.get('point').length;
+      point = dataController!.myDocument!.get('point');
     } catch (e) {
       point = 0;
     }

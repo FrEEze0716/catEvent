@@ -992,7 +992,9 @@ class _CreateEventViewState extends State<CreateEventView> {
                                 'tags': tags,
                                 'inviter': [
                                   FirebaseAuth.instance.currentUser!.uid
-                                ]
+                                ],
+                                'saves': [],
+                                'likes': [],
                               };
 
                               await dataController
